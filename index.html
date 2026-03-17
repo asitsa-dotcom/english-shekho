@@ -6,282 +6,225 @@
 <title>ইংলিশ শেখো — English Shekho</title>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
-:root {
-  --green: #16a34a;
-  --green-dark: #15803d;
-  --green-light: #dcfce7;
-  --green-mid: #86efac;
-  --amber: #d97706;
-  --amber-light: #fef3c7;
-  --red: #dc2626;
-  --red-light: #fee2e2;
-  --bg: #f0fdf4;
-  --surface: #ffffff;
-  --surface2: #f8fafc;
-  --border: #e2e8f0;
-  --text: #0f172a;
-  --text2: #475569;
-  --text3: #94a3b8;
-  --radius: 16px;
-  --shadow: 0 4px 24px rgba(0,0,0,0.08);
+:root{
+  --green:#16a34a;--green-d:#15803d;--green-l:#dcfce7;--green-m:#86efac;
+  --amber:#d97706;--amber-l:#fef3c7;--red:#dc2626;--red-l:#fee2e2;
+  --bg:#f0fdf4;--surface:#fff;--surface2:#f8fafc;--border:#e2e8f0;
+  --text:#0f172a;--text2:#475569;--text3:#94a3b8;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; font-family: 'Hind Siliguri', sans-serif; background: var(--bg); color: var(--text); }
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:'Hind Siliguri',sans-serif;background:var(--bg);color:var(--text)}
+.screen{display:none;position:fixed;inset:0;z-index:100;overflow-y:auto}
+.screen.active{display:flex}
 
-/* ── SPLASH SCREEN ── */
-#splash {
-  position: fixed; inset: 0; z-index: 9999;
-  background: linear-gradient(135deg, #052e16 0%, #14532d 50%, #166534 100%);
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 24px; padding: 32px;
-}
-.splash-logo {
-  width: 90px; height: 90px; border-radius: 50%;
-  background: rgba(255,255,255,0.12);
-  border: 2px solid rgba(255,255,255,0.3);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 42px; animation: popIn 0.6s ease;
-}
-@keyframes popIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-.splash h1 { font-family: 'Sora', sans-serif; color: #fff; font-size: 32px; font-weight: 700; text-align: center; animation: fadeUp 0.6s 0.2s both ease; }
-.splash p { color: rgba(255,255,255,0.7); font-size: 15px; text-align: center; animation: fadeUp 0.6s 0.3s both ease; }
-@keyframes fadeUp { from { transform: translateY(16px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-.api-setup-box {
-  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 20px; padding: 24px; width: 100%; max-width: 440px;
-  animation: fadeUp 0.6s 0.4s both ease;
-}
-.api-setup-box label { color: rgba(255,255,255,0.9); font-size: 13px; display: block; margin-bottom: 8px; }
-.api-setup-box input {
-  width: 100%; padding: 12px 16px; border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.08);
-  color: #fff; font-size: 14px; font-family: 'Sora', sans-serif; outline: none;
-  margin-bottom: 12px;
-}
-.api-setup-box input::placeholder { color: rgba(255,255,255,0.35); }
-.api-setup-box input:focus { border-color: var(--green-mid); }
-.start-btn {
-  width: 100%; padding: 14px; border-radius: 12px;
-  background: var(--green); color: #fff; font-size: 16px; font-weight: 600;
-  border: none; cursor: pointer; font-family: 'Hind Siliguri', sans-serif;
-  transition: background 0.2s, transform 0.1s;
-}
-.start-btn:hover { background: var(--green-dark); }
-.start-btn:active { transform: scale(0.98); }
-.splash-note { color: rgba(255,255,255,0.45); font-size: 11px; text-align: center; margin-top: 8px; }
-.get-key-link { color: var(--green-mid); text-decoration: none; font-weight: 600; }
-.get-key-link:hover { text-decoration: underline; }
+/* AUTH */
+#authScreen{background:linear-gradient(135deg,#052e16,#14532d,#166534);flex-direction:column;align-items:center;justify-content:center;padding:24px;gap:18px}
+.auth-logo{width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-size:38px;animation:popIn 0.5s ease}
+@keyframes popIn{from{transform:scale(0.5);opacity:0}to{transform:scale(1);opacity:1}}
+.auth-title{font-family:'Sora',sans-serif;color:#fff;font-size:28px;font-weight:700;text-align:center}
+.auth-sub{color:rgba(255,255,255,0.6);font-size:14px;text-align:center}
+.auth-card{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:24px;padding:28px;width:100%;max-width:420px;animation:fadeUp 0.5s 0.2s both}
+@keyframes fadeUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.auth-tabs{display:flex;gap:4px;background:rgba(0,0,0,0.25);border-radius:12px;padding:4px;margin-bottom:18px}
+.auth-tab{flex:1;padding:8px;border-radius:8px;border:none;background:transparent;color:rgba(255,255,255,0.55);font-size:14px;font-weight:600;cursor:pointer;font-family:'Hind Siliguri',sans-serif;transition:all 0.2s}
+.auth-tab.active{background:var(--green);color:#fff}
+.auth-label{color:rgba(255,255,255,0.8);font-size:13px;display:block;margin-bottom:6px;margin-top:14px}
+.auth-input{width:100%;padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.1);color:#fff;font-size:14px;font-family:'Hind Siliguri',sans-serif;outline:none;transition:border-color 0.2s}
+.auth-input:focus{border-color:var(--green-m)}
+.auth-input::placeholder{color:rgba(255,255,255,0.3)}
+.auth-btn{width:100%;padding:14px;border-radius:12px;background:var(--green);color:#fff;font-size:16px;font-weight:700;border:none;cursor:pointer;font-family:'Hind Siliguri',sans-serif;margin-top:18px;transition:all 0.2s}
+.auth-btn:hover{background:var(--green-d)}
+.auth-err{color:#fca5a5;font-size:13px;margin-top:8px;display:none;text-align:center}
+.auth-loading{display:none;align-items:center;justify-content:center;gap:8px;color:rgba(255,255,255,0.7);font-size:14px;margin-top:10px}
+.spin{width:18px;height:18px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.auth-footer{color:rgba(255,255,255,0.3);font-size:11px;text-align:center}
 
-/* ── APP SHELL ── */
-#app { display: none; flex-direction: column; height: 100vh; max-width: 860px; margin: 0 auto; background: var(--surface); box-shadow: var(--shadow); }
+/* API SCREEN */
+#apiScreen{background:linear-gradient(135deg,#1e3a5f,#1e40af);flex-direction:column;align-items:center;justify-content:center;padding:24px;gap:20px}
+.api-card{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:24px;padding:28px;width:100%;max-width:420px}
+.api-card h2{font-family:'Sora',sans-serif;color:#fff;font-size:22px;margin-bottom:8px}
+.api-card p{color:rgba(255,255,255,0.7);font-size:14px;line-height:1.6;margin-bottom:16px}
+.api-steps{background:rgba(0,0,0,0.2);border-radius:12px;padding:16px;margin-bottom:16px}
+.api-steps p{color:rgba(255,255,255,0.8);font-size:13px;line-height:1.9}
+.api-steps a{color:#93c5fd;text-decoration:none;font-weight:600}
+.api-input{width:100%;padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.1);color:#fff;font-size:14px;font-family:'Sora',sans-serif;outline:none;margin-bottom:12px}
+.api-input:focus{border-color:#93c5fd}
+.api-input::placeholder{color:rgba(255,255,255,0.3)}
+.api-btn{width:100%;padding:14px;border-radius:12px;background:var(--green);color:#fff;font-size:16px;font-weight:700;border:none;cursor:pointer;font-family:'Hind Siliguri',sans-serif;transition:all 0.2s}
+.api-btn:hover{background:var(--green-d)}
 
-/* ── TOP BAR ── */
-.topbar {
-  display: flex; align-items: center; gap: 12px;
-  padding: 12px 20px; border-bottom: 1px solid var(--border);
-  background: var(--surface); flex-shrink: 0;
-}
-.logo-sm { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, var(--green), #15803d); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-.app-title { font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 700; color: var(--text); }
-.app-sub { font-size: 11px; color: var(--text3); }
+/* APP */
+#appScreen{flex-direction:column;height:100vh;max-width:860px;margin:0 auto;background:var(--surface);box-shadow:0 8px 32px rgba(0,0,0,0.1)}
 
-/* TIMER */
-.timer-pill {
-  margin-left: auto; display: flex; align-items: center; gap: 6px;
-  background: var(--green-light); border: 1px solid var(--green-mid);
-  border-radius: 20px; padding: 5px 12px;
-}
-.timer-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: blink 1s infinite; }
-@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
-.timer-text { font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 600; color: var(--green-dark); }
-.timer-pill.warning { background: var(--amber-light); border-color: #fcd34d; }
-.timer-pill.warning .timer-dot { background: var(--amber); }
-.timer-pill.warning .timer-text { color: var(--amber); }
-.timer-pill.expired { background: var(--red-light); border-color: #fca5a5; }
-.timer-pill.expired .timer-dot { background: var(--red); animation: none; }
-.timer-pill.expired .timer-text { color: var(--red); }
+/* TOPBAR */
+.topbar{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid var(--border);background:var(--surface);flex-shrink:0}
+.logo-sm{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--green-d));display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.app-name{font-family:'Sora',sans-serif;font-size:14px;font-weight:700}
+.app-user{font-size:11px;color:var(--text3)}
+.timer-pill{display:flex;align-items:center;gap:5px;background:var(--green-l);border:1px solid var(--green-m);border-radius:20px;padding:4px 10px;margin-left:auto}
+.timer-pill.warn{background:var(--amber-l);border-color:#fcd34d}
+.timer-pill.warn .tdot{background:var(--amber)}
+.timer-pill.warn .ttime{color:var(--amber)}
+.timer-pill.exp{background:var(--red-l);border-color:#fca5a5}
+.timer-pill.exp .tdot{background:var(--red);animation:none}
+.timer-pill.exp .ttime{color:var(--red)}
+.tdot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 1s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.ttime{font-family:'Sora',sans-serif;font-size:12px;font-weight:700;color:var(--green-d)}
+.logout-btn{padding:4px 10px;border-radius:20px;font-size:11px;border:1px solid var(--border);background:var(--surface2);color:var(--text2);cursor:pointer;font-family:'Hind Siliguri',sans-serif;transition:all 0.15s;flex-shrink:0}
+.logout-btn:hover{border-color:var(--red);color:var(--red)}
 
-/* RESET BTN */
-.reset-btn {
-  padding: 5px 12px; border-radius: 20px; font-size: 12px;
-  border: 1px solid var(--border); background: var(--surface2);
-  color: var(--text2); cursor: pointer; font-family: 'Hind Siliguri', sans-serif;
-  transition: all 0.15s; flex-shrink: 0;
-}
-.reset-btn:hover { border-color: var(--green); color: var(--green); }
+/* VOICE BAR */
+.voice-bar{display:flex;align-items:center;gap:8px;padding:7px 16px;border-bottom:1px solid var(--border);background:#fafff5;flex-shrink:0;flex-wrap:wrap}
+.vbar-label{font-size:12px;color:var(--text2);font-weight:600}
+.vselect{padding:4px 10px;border-radius:20px;border:1px solid var(--border);background:var(--surface);font-size:12px;font-family:'Hind Siliguri',sans-serif;color:var(--text);outline:none;cursor:pointer}
+.voice-toggle{display:flex;align-items:center;gap:6px;margin-left:auto}
+.vtog-label{font-size:12px;color:var(--text2)}
+.tsw{position:relative;width:38px;height:20px;cursor:pointer}
+.tsw input{opacity:0;width:0;height:0}
+.tsl{position:absolute;inset:0;background:#cbd5e1;border-radius:20px;transition:0.3s}
+.tsl:before{content:'';position:absolute;height:14px;width:14px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:0.3s}
+input:checked+.tsl{background:var(--green)}
+input:checked+.tsl:before{transform:translateX(18px)}
 
-/* ── MODE TABS ── */
-.mode-tabs {
-  display: flex; gap: 6px; padding: 10px 16px;
-  border-bottom: 1px solid var(--border); overflow-x: auto;
-  flex-shrink: 0; scrollbar-width: none;
-}
-.mode-tabs::-webkit-scrollbar { display: none; }
-.tab {
-  padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600;
-  cursor: pointer; border: 1px solid var(--border); white-space: nowrap;
-  color: var(--text2); background: var(--surface); transition: all 0.15s;
-  font-family: 'Hind Siliguri', sans-serif;
-}
-.tab.active { background: var(--green); color: #fff; border-color: var(--green); }
-.tab:hover:not(.active) { border-color: var(--green); color: var(--green); }
+/* MODES */
+.mode-tabs{display:flex;gap:5px;padding:8px 14px;border-bottom:1px solid var(--border);overflow-x:auto;flex-shrink:0;scrollbar-width:none}
+.mode-tabs::-webkit-scrollbar{display:none}
+.tab{padding:5px 12px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--border);white-space:nowrap;color:var(--text2);background:var(--surface);transition:all 0.15s;font-family:'Hind Siliguri',sans-serif}
+.tab.active{background:var(--green);color:#fff;border-color:var(--green)}
+.tab:hover:not(.active){border-color:var(--green);color:var(--green)}
 
-/* ── QUICK ACTIONS ── */
-.quick-row {
-  display: flex; gap: 8px; padding: 8px 16px;
-  border-bottom: 1px solid var(--border); overflow-x: auto; flex-shrink: 0;
-  scrollbar-width: none;
-}
-.quick-row::-webkit-scrollbar { display: none; }
-.qbtn {
-  padding: 5px 12px; border-radius: 20px; font-size: 12px; cursor: pointer;
-  border: 1px solid var(--border); background: var(--surface2); white-space: nowrap;
-  color: var(--text2); font-family: 'Hind Siliguri', sans-serif; transition: all 0.15s;
-}
-.qbtn:hover { background: var(--green-light); border-color: var(--green); color: var(--green-dark); }
+/* QUICK */
+.quick-row{display:flex;gap:6px;padding:7px 14px;border-bottom:1px solid var(--border);overflow-x:auto;flex-shrink:0;scrollbar-width:none}
+.quick-row::-webkit-scrollbar{display:none}
+.qbtn{padding:5px 11px;border-radius:20px;font-size:11px;cursor:pointer;border:1px solid var(--border);background:var(--surface2);white-space:nowrap;color:var(--text2);font-family:'Hind Siliguri',sans-serif;transition:all 0.15s}
+.qbtn:hover{background:var(--green-l);border-color:var(--green);color:var(--green-d)}
 
-/* ── MESSAGES ── */
-.messages { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 14px; }
-.msg { display: flex; gap: 10px; align-items: flex-start; animation: msgIn 0.3s ease; }
-@keyframes msgIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-.msg.user { flex-direction: row-reverse; }
-.av {
-  width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 14px; font-weight: 700;
-}
-.av.bot { background: linear-gradient(135deg, var(--green), #15803d); color: #fff; }
-.av.user { background: linear-gradient(135deg, #1d4ed8, #3b82f6); color: #fff; }
-.bubble {
-  max-width: 78%; padding: 11px 15px; font-size: 14px; line-height: 1.7;
-  white-space: pre-wrap; font-family: 'Hind Siliguri', sans-serif;
-}
-.bubble.bot {
-  background: var(--surface2); color: var(--text);
-  border: 1px solid var(--border); border-radius: 4px 16px 16px 16px;
-}
-.bubble.user {
-  background: linear-gradient(135deg, var(--green), var(--green-dark));
-  color: #fff; border-radius: 16px 4px 16px 16px;
-}
-.typing-bubble {
-  background: var(--surface2); border: 1px solid var(--border);
-  border-radius: 4px 16px 16px 16px; padding: 12px 16px;
-  display: flex; gap: 5px; align-items: center;
-}
-.tdot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: bounce 1.2s infinite; }
-.tdot:nth-child(2) { animation-delay: 0.2s; }
-.tdot:nth-child(3) { animation-delay: 0.4s; }
-@keyframes bounce { 0%,80%,100% { transform: translateY(0); } 40% { transform: translateY(-6px); } }
+/* MESSAGES */
+.messages{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:12px}
+.msg{display:flex;gap:9px;align-items:flex-start;animation:msgIn 0.3s ease}
+@keyframes msgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.msg.user{flex-direction:row-reverse}
+.av{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+.av.bot{background:linear-gradient(135deg,var(--green),var(--green-d));color:#fff}
+.av.user{background:linear-gradient(135deg,#2563eb,#3b82f6);color:#fff}
+.bwrap{display:flex;flex-direction:column;gap:4px;max-width:78%}
+.msg.user .bwrap{align-items:flex-end}
+.bubble{padding:10px 14px;font-size:14px;line-height:1.7;white-space:pre-wrap;font-family:'Hind Siliguri',sans-serif}
+.bubble.bot{background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:4px 16px 16px 16px}
+.bubble.user{background:linear-gradient(135deg,var(--green),var(--green-d));color:#fff;border-radius:16px 4px 16px 16px}
+.speak-btn{padding:3px 10px;border-radius:20px;font-size:11px;border:1px solid var(--border);background:var(--surface);color:var(--text2);cursor:pointer;font-family:'Hind Siliguri',sans-serif;transition:all 0.15s;align-self:flex-start}
+.speak-btn:hover{background:var(--green-l);border-color:var(--green);color:var(--green-d)}
+.typing-wrap{display:flex;gap:9px;align-items:flex-start}
+.typing-bubble{background:var(--surface2);border:1px solid var(--border);border-radius:4px 16px 16px 16px;padding:12px 16px;display:flex;gap:5px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:bounce 1.2s infinite}
+.dot:nth-child(2){animation-delay:0.2s}
+.dot:nth-child(3){animation-delay:0.4s}
+@keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}}
 
-/* ── INPUT AREA ── */
-.input-wrap { padding: 12px 16px; border-top: 1px solid var(--border); background: var(--surface); flex-shrink: 0; }
-.input-row { display: flex; gap: 8px; align-items: flex-end; }
-.chat-input {
-  flex: 1; border: 1.5px solid var(--border); border-radius: 14px;
-  padding: 10px 14px; font-size: 14px; font-family: 'Hind Siliguri', sans-serif;
-  resize: none; max-height: 110px; outline: none; background: var(--surface2);
-  color: var(--text); line-height: 1.5; transition: border-color 0.2s;
-}
-.chat-input:focus { border-color: var(--green); }
-.chat-input::placeholder { color: var(--text3); }
-.icon-btn {
-  width: 42px; height: 42px; border-radius: 50%; border: 1.5px solid var(--border);
-  background: var(--surface2); cursor: pointer; display: flex; align-items: center;
-  justify-content: center; flex-shrink: 0; transition: all 0.15s;
-}
-.icon-btn:hover { border-color: var(--green); background: var(--green-light); }
-.icon-btn.recording { background: #fee2e2; border-color: var(--red); animation: pulse 1s infinite; }
-@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.07); } }
-.send-btn {
-  width: 42px; height: 42px; border-radius: 50%; border: none;
-  background: linear-gradient(135deg, var(--green), var(--green-dark));
-  cursor: pointer; display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; transition: transform 0.15s, box-shadow 0.15s;
-  box-shadow: 0 4px 12px rgba(22,163,74,0.3);
-}
-.send-btn:hover { transform: scale(1.06); box-shadow: 0 6px 16px rgba(22,163,74,0.4); }
-.send-btn:active { transform: scale(0.97); }
+/* INPUT */
+.input-wrap{padding:10px 14px;border-top:1px solid var(--border);background:var(--surface);flex-shrink:0}
+.input-row{display:flex;gap:7px;align-items:flex-end}
+.chat-input{flex:1;border:1.5px solid var(--border);border-radius:14px;padding:10px 14px;font-size:14px;font-family:'Hind Siliguri',sans-serif;resize:none;max-height:100px;outline:none;background:var(--surface2);color:var(--text);line-height:1.5;transition:border-color 0.2s}
+.chat-input:focus{border-color:var(--green)}
+.chat-input::placeholder{color:var(--text3)}
+.icon-btn{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--border);background:var(--surface2);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.15s}
+.icon-btn:hover{border-color:var(--green);background:var(--green-l)}
+.icon-btn.rec{background:#fee2e2;border-color:var(--red);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+.send-btn{width:40px;height:40px;border-radius:50%;border:none;background:linear-gradient(135deg,var(--green),var(--green-d));cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(22,163,74,0.35);transition:all 0.15s}
+.send-btn:hover{transform:scale(1.06)}
+.send-btn:active{transform:scale(0.97)}
+.footer{text-align:center;padding:5px 16px 8px;font-size:10px;color:var(--text3);flex-shrink:0;border-top:1px solid var(--border)}
+.footer span{color:var(--green);font-weight:600}
 
-/* ── FOOTER ── */
-.footer {
-  text-align: center; padding: 6px 16px 10px;
-  font-size: 10px; color: var(--text3); flex-shrink: 0;
-  border-top: 1px solid var(--border);
-}
-.footer span { color: var(--green); font-weight: 600; }
-
-/* ── EXPIRED OVERLAY ── */
-#expiredOverlay {
-  display: none; position: fixed; inset: 0; z-index: 8888;
-  background: rgba(0,0,0,0.75); backdrop-filter: blur(4px);
-  align-items: center; justify-content: center; padding: 24px;
-}
-.expired-box {
-  background: #fff; border-radius: 24px; padding: 36px 28px;
-  max-width: 380px; width: 100%; text-align: center;
-}
-.expired-icon { font-size: 52px; margin-bottom: 12px; }
-.expired-box h2 { font-family: 'Sora', sans-serif; font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
-.expired-box p { font-size: 14px; color: var(--text2); line-height: 1.6; margin-bottom: 20px; }
-.pay-btn {
-  width: 100%; padding: 14px; border-radius: 12px;
-  background: linear-gradient(135deg, var(--green), var(--green-dark));
-  color: #fff; font-size: 15px; font-weight: 600; border: none; cursor: pointer;
-  font-family: 'Hind Siliguri', sans-serif; margin-bottom: 10px; transition: opacity 0.2s;
-}
-.pay-btn:hover { opacity: 0.9; }
-.dev-credit { font-size: 11px; color: var(--text3); margin-top: 12px; }
-
-/* ── RESPONSIVE ── */
-@media (max-width: 600px) {
-  .app-title { font-size: 13px; }
-  .bubble { max-width: 88%; font-size: 13px; }
-  .timer-text { font-size: 12px; }
-}
+/* EXPIRED */
+#expiredOverlay{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.8);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:24px}
+.exp-box{background:#fff;border-radius:24px;padding:36px 28px;max-width:380px;width:100%;text-align:center}
+.exp-icon{font-size:52px;margin-bottom:12px}
+.exp-box h2{font-family:'Sora',sans-serif;font-size:22px;font-weight:700;margin-bottom:8px}
+.exp-box p{font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:20px}
+.exp-btn{width:100%;padding:13px;border-radius:12px;color:#fff;font-size:15px;font-weight:600;border:none;cursor:pointer;font-family:'Hind Siliguri',sans-serif;margin-bottom:8px}
+.exp-credit{font-size:11px;color:var(--text3);margin-top:12px}
+@media(max-width:600px){.bubble{font-size:13px}.auth-title{font-size:22px}}
 </style>
 </head>
 <body>
 
-<!-- ══════════════ SPLASH / SETUP ══════════════ -->
-<div id="splash">
-  <div class="splash-logo">🎓</div>
-  <h1 style="font-family:'Sora',sans-serif;color:#fff;font-size:28px;font-weight:700;text-align:center;">ইংলিশ শেখো</h1>
-  <p style="color:rgba(255,255,255,0.65);font-size:14px;text-align:center;">তোমার AI English Tutor — বাংলায় শেখো, ইংরেজিতে এগিয়ে যাও</p>
-
-  <div class="api-setup-box">
-    <label>🔑 Gemini API Key দাও (একবারই লাগবে)</label>
-    <input type="password" id="keyInput" placeholder="AIzaSy... এখানে paste করো" />
-    <a class="get-key-link" href="https://aistudio.google.com/apikey" target="_blank" style="display:block;font-size:12px;margin-bottom:14px;text-align:right;">
-      👉 এখান থেকে ফ্রি Key নাও →
-    </a>
-    <label style="margin-top:4px;">👤 তোমার নাম (optional)</label>
-    <input type="text" id="nameInput" placeholder="যেমন: Rahul, Priya..." />
-    <button class="start-btn" onclick="startApp()">শুরু করি! ▶</button>
-    <p class="splash-note">প্রথম ২ ঘণ্টা সম্পূর্ণ ফ্রি • API Key তোমার device এ save থাকে</p>
+<!-- AUTH -->
+<div id="authScreen" class="screen active">
+  <div class="auth-logo">🎓</div>
+  <div class="auth-title">ইংলিশ শেখো</div>
+  <div class="auth-sub">তোমার AI English Tutor — বাংলায় শেখো, ইংরেজিতে এগিয়ে যাও</div>
+  <div class="auth-card">
+    <div class="auth-tabs">
+      <button class="auth-tab active" onclick="switchTab('login',this)">লগইন</button>
+      <button class="auth-tab" onclick="switchTab('signup',this)">নতুন অ্যাকাউন্ট</button>
+    </div>
+    <div id="signupExtra" style="display:none">
+      <label class="auth-label">তোমার নাম</label>
+      <input class="auth-input" id="authName" type="text" placeholder="যেমন: Rahul, Priya..."/>
+    </div>
+    <label class="auth-label">Email</label>
+    <input class="auth-input" id="authEmail" type="email" placeholder="example@gmail.com"/>
+    <label class="auth-label">Password</label>
+    <input class="auth-input" id="authPass" type="password" placeholder="কমপক্ষে ৬ অক্ষর"/>
+    <div class="auth-err" id="authErr"></div>
+    <div class="auth-loading" id="authLoading"><div class="spin"></div> একটু অপেক্ষা করো...</div>
+    <button class="auth-btn" id="authBtn" onclick="handleAuth()">লগইন করো →</button>
   </div>
-
-  <p style="color:rgba(255,255,255,0.3);font-size:11px;margin-top:8px;">Developed by <strong style="color:rgba(255,255,255,0.5);">Asit Kumar Sarkar</strong></p>
+  <div class="auth-footer">Developed by <strong style="color:rgba(255,255,255,0.5)">Asit Kumar Sarkar</strong></div>
 </div>
 
-<!-- ══════════════ MAIN APP ══════════════ -->
-<div id="app">
-  <!-- TOP BAR -->
+<!-- API KEY -->
+<div id="apiScreen" class="screen">
+  <div class="api-card">
+    <h2>🔑 Gemini API Key দাও</h2>
+    <p>একবার দিলেই হবে — তোমার account এ save থাকবে, আর কোনোদিন দিতে হবে না।</p>
+    <div class="api-steps">
+      <p>১. <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a> এ যাও</p>
+      <p>২. "Create API Key" click করো</p>
+      <p>৩. Key copy করে নিচে paste করো</p>
+    </div>
+    <input class="api-input" id="apiKeyInput" type="password" placeholder="AIzaSy... এখানে paste করো"/>
+    <button class="api-btn" onclick="saveApiKey()">Save করো ও শুরু করি! ▶</button>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="appScreen" class="screen">
   <div class="topbar">
     <div class="logo-sm">🎓</div>
     <div>
-      <div class="app-title">ইংলিশ শেখো</div>
-      <div class="app-sub">AI English Tutor</div>
+      <div class="app-name">ইংলিশ শেখো</div>
+      <div class="app-user" id="userLabel">লোড হচ্ছে...</div>
     </div>
     <div class="timer-pill" id="timerPill">
-      <div class="timer-dot" id="timerDot"></div>
-      <span class="timer-text" id="timerText">2:00:00</span>
-      <span style="font-size:10px;color:var(--text3);margin-left:2px;">ফ্রি</span>
+      <div class="tdot"></div>
+      <span class="ttime" id="timerText">2:00:00</span>
+      <span style="font-size:10px;color:var(--text3);margin-left:2px">ফ্রি</span>
     </div>
-    <button class="reset-btn" onclick="confirmReset()">↺ Reset</button>
+    <button class="logout-btn" onclick="doLogout()">Logout</button>
   </div>
 
-  <!-- MODE TABS -->
+  <div class="voice-bar">
+    <span class="vbar-label">🔊 Voice:</span>
+    <select class="vselect" id="voiceGender">
+      <option value="female">👩 Female (Priya)</option>
+      <option value="male">👨 Male (Arjun)</option>
+    </select>
+    <select class="vselect" id="voiceSpeed">
+      <option value="0.8">🐢 Slow</option>
+      <option value="1" selected>▶ Normal</option>
+      <option value="1.2">⚡ Fast</option>
+    </select>
+    <div class="voice-toggle">
+      <span class="vtog-label">Auto Read</span>
+      <label class="tsw"><input type="checkbox" id="autoRead" checked/><span class="tsl"></span></label>
+    </div>
+  </div>
+
   <div class="mode-tabs">
     <button class="tab active" onclick="setMode('chat',this)">💬 Chat</button>
     <button class="tab" onclick="setMode('grammar',this)">✅ Grammar</button>
@@ -292,386 +235,180 @@ html, body { height: 100%; font-family: 'Hind Siliguri', sans-serif; background:
     <button class="tab" onclick="setMode('vocabulary',this)">📚 Vocabulary</button>
   </div>
 
-  <!-- QUICK ACTIONS -->
   <div class="quick-row">
     <button class="qbtn" onclick="quickSend('daily practice শুরু করো')">📅 Daily Practice</button>
-    <button class="qbtn" onclick="quickSend('আজকের vocabulary শেখাও')">📖 Word of the Day</button>
+    <button class="qbtn" onclick="quickSend('আজকের vocabulary শেখাও')">📖 Word of Day</button>
     <button class="qbtn" onclick="quickSend('tense শেখাও')">📐 Tense</button>
     <button class="qbtn" onclick="quickSend('দোকানে কেনাকাটার conversation practice করতে চাই')">🛒 Shopping</button>
-    <button class="qbtn" onclick="quickSend('office এ কথা বলার practice করতে চাই')">💼 Office Talk</button>
-    <button class="qbtn" onclick="quickSend('pronunciation শেখাও: beautiful')">🗣️ Pronunciation</button>
+    <button class="qbtn" onclick="quickSend('office meeting এর English শেখাও')">💼 Office</button>
+    <button class="qbtn" onclick="quickSend('pronunciation শেখাও: comfortable')">🗣️ Pronunciation</button>
+    <button class="qbtn" onclick="quickSend('interview practice করতে চাই')">🎯 Interview</button>
   </div>
 
-  <!-- MESSAGES -->
   <div class="messages" id="messages"></div>
 
-  <!-- INPUT -->
   <div class="input-wrap">
     <div class="input-row">
-      <textarea class="chat-input" id="chatInput" rows="1"
-        placeholder="বাংলায় বা English এ লেখো... (Enter = send, Shift+Enter = new line)"
-        onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+      <textarea class="chat-input" id="chatInput" rows="1" placeholder="বাংলায় বা English এ লেখো... (Enter = send)" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
       <button class="icon-btn" id="voiceBtn" onclick="toggleVoice()" title="Voice Input">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
-          <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-          <line x1="12" y1="19" x2="12" y2="23"/>
-          <line x1="8" y1="23" x2="16" y2="23"/>
-        </svg>
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
       </button>
       <button class="send-btn" onclick="sendMessage()">
-        <svg width="16" height="16" fill="none" stroke="#fff" stroke-width="2.5" viewBox="0 0 24 24">
-          <line x1="22" y1="2" x2="11" y2="13"/>
-          <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-        </svg>
+        <svg width="15" height="15" fill="none" stroke="#fff" stroke-width="2.5" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
       </button>
     </div>
   </div>
-
-  <!-- FOOTER -->
-  <div class="footer">
-    Developed with ❤️ by <span>Asit Kumar Sarkar</span> &nbsp;•&nbsp; Powered by Google Gemini AI
-  </div>
+  <div class="footer">Developed with ❤️ by <span>Asit Kumar Sarkar</span> &nbsp;•&nbsp; Powered by Google Gemini AI</div>
 </div>
 
-<!-- EXPIRED OVERLAY -->
+<!-- EXPIRED -->
 <div id="expiredOverlay">
-  <div class="expired-box">
-    <div class="expired-icon">⏰</div>
+  <div class="exp-box">
+    <div class="exp-icon">⏰</div>
     <h2>২ ঘণ্টার ফ্রি সময় শেষ!</h2>
-    <p>তোমার ফ্রি ট্রায়াল শেষ হয়ে গেছে। English শেখা চালিয়ে যেতে চাইলে Premium এ upgrade করো — অথবা নিজের Gemini API Key দিয়ে চালিয়ে যাও।</p>
-    <button class="pay-btn" onclick="window.open('https://aistudio.google.com/apikey','_blank')">
-      🔑 নিজের API Key দিয়ে চালাও (ফ্রি)
-    </button>
-    <button class="pay-btn" style="background:linear-gradient(135deg,#1d4ed8,#3b82f6);" onclick="resetTimer()">
-      ▶ নতুন করে শুরু করো
-    </button>
-    <div class="dev-credit">Developed by Asit Kumar Sarkar</div>
+    <p>English শেখা চালিয়ে যেতে নিচের option বেছে নাও।</p>
+    <button class="exp-btn" style="background:linear-gradient(135deg,#16a34a,#15803d)" onclick="window.open('https://aistudio.google.com/apikey','_blank')">🔑 নিজের Gemini Key দিয়ে চালাও (ফ্রি)</button>
+    <button class="exp-btn" style="background:linear-gradient(135deg,#2563eb,#3b82f6)" onclick="resetTimer()">▶ আরও ২ ঘণ্টা শুরু করো</button>
+    <div class="exp-credit">Developed by Asit Kumar Sarkar</div>
   </div>
 </div>
 
-<script>
-/* ═══════════════════════════════
-   STATE
-═══════════════════════════════ */
-const FREE_SECONDS = 2 * 60 * 60; // 2 hours
-let apiKey = '';
-let userName = '';
-let currentMode = 'chat';
-let chatHistory = [];
-let timerInterval = null;
-let secondsLeft = FREE_SECONDS;
-let recognition = null;
-let isRecording = false;
-let timerStarted = false;
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+import{getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,onAuthStateChanged,updateProfile}from"https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+import{getFirestore,doc,getDoc,setDoc}from"https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 
-/* ═══════════════════════════════
-   SYSTEM PROMPT
-═══════════════════════════════ */
-const SYSTEM_PROMPT = `You are "English Shekho" (ইংলিশ শেখো) — a warm, expert Spoken English tutor who always speaks in natural, clear, everyday Bangla. You are like a helpful dada or didi who makes English learning easy and fun.
+const app=initializeApp({apiKey:"AIzaSyBQ7q4__67fi-BxUYU8QZ0-TVdq56hz0Ic",authDomain:"english-shekho.firebaseapp.com",projectId:"english-shekho",storageBucket:"english-shekho.firebasestorage.app",messagingSenderId:"918476651273",appId:"1:918476651273:web:7798cfec9cb44152f231d8"});
+const auth=getAuth(app),db=getFirestore(app);
 
-🎤 VOICE INPUT — IMPORTANT RULES:
-- User যখন কথা বলে, সে হয়তো একটু ধীরে বলে বা মাঝে থামে।
-- মাঝে থামলেও ধরে নেবে সে এখনো বলছে — তাড়াহুড়ো করবে না।
-- User এর কথা শেষ না হওয়া পর্যন্ত reply করবে না।
-- যদি sentence অসম্পূর্ণ মনে হয়, জিজ্ঞেস করো: "তুমি কি এটা বলতে চেয়েছিলে: [complete sentence]?"
-- User কে সবসময় পুরো sentence বলতে উৎসাহিত করো।
-- Voice এ কথা বলার সময় response ছোট রাখো — ৩ থেকে ৪টা point এর বেশি একসাথে বলবে না।
+const FREE=7200;
+let gKey='',curUser=null,mode='chat',history=[],timerInt=null,secsLeft=FREE,recog=null,isRec=false,voices=[];
 
-🔊 VOICE MODE RULES:
-- ছোট ছোট বাক্যে বলো। একটানা লম্বা কথা বলবে না।
-- English শব্দ বলার সময় আস্তে, স্পষ্টভাবে উচ্চারণ করো।
-- Pronunciation শেখানোর সময় বাংলায় ভেঙে ভেঙে বলো। যেমন: "Beautiful" = "বিউ... টি... ফুল"
-- প্রতিটা reply এর শেষে জিজ্ঞেস করো: "বুঝেছো? আরেকটু বলবো?"
+const PROMPT=`You are "English Shekho" — a warm Bengali English tutor. Always speak in natural Bangla. Be like a helpful dada or didi.
 
-📝 TEXT MODE FORMAT (যখন grammar ভুল ধরবে):
+📝 GRAMMAR FORMAT (when correcting):
 ━━━━━━━━━━━━━━━━━━
-🗣️ তুমি বলেছো:
-[user এর sentence হুবহু]
-
-✅ সঠিক বাক্য:
-[corrected English sentence]
-
-❌ ভুল কোথায়:
-[কোন word বা grammar ভুল]
-
-📖 কেন ভুল — সহজ বাংলায়:
-[কারণটা একদম সহজ বাংলায়]
-
-💡 Rule মনে রাখার সহজ উপায়:
-[একটা trick বা ছোট example]
-
-🔁 এবার এগুলো practice করো:
-১. [example sentence 1]
-২. [example sentence 2]
-
-👏 [একটা ছোট্ট উৎসাহের কথা]
+🗣️ তুমি বলেছো: [sentence]
+✅ সঠিক বাক্য: [corrected]
+❌ ভুল কোথায়: [error]
+📖 কেন ভুল: [reason in Bangla]
+💡 মনে রাখার উপায়: [tip]
+🔁 Practice করো:
+১. [example 1]
+২. [example 2]
+👏 [encouragement]
 ━━━━━━━━━━━━━━━━━━
 
 🗣️ PRONUNCIATION FORMAT:
 ▸ Spelling: [word]
-▸ বাংলায় উচ্চারণ: [syllable breakdown]
-▸ জোর দাও: [stressed syllable]
-▸ বাঙালিরা যেভাবে ভুল করে: [common mistake]
-▸ সঠিকভাবে বলো: [correct way, slowly]
+▸ বাংলায়: [breakdown like কাম্ফ্ট্-আব্-এল]
+▸ জোর দাও: [syllable]
+▸ বাঙালিদের ভুল: [mistake]
+▸ সঠিক: [correct way]
 ▸ Example: [sentence]
 
-🎯 SPECIAL MODES:
-▶ "daily practice" → ৫টা common English sentence একটা একটা করে দাও, correction দাও
-▶ "conversation practice" → real-life situation বেছে নাও, character হও, conversation করো
-▶ "pronunciation শেখাও" → PRONUNCIATION FORMAT অনুযায়ী শেখাও
-▶ "interview practice" → HR interviewer হও, common questions দাও, feedback দাও বাংলায়
-▶ "grammar শেখাও [topic]" → বাংলায় definition, ৩টা example, common বাঙালি mistake
-▶ "translate করো" → translation + ২টা alternative + কোনটা বেশি natural কেন
-▶ English sentence দিলে → grammar check করো, ভুল থাকলে TEXT MODE FORMAT দাও
+RULES: সবসময় বাংলায় বোঝাও। নাম জানলে নাম ধরে ডাকো। কখনো নিরুৎসাহিত করবে না। প্রতি reply শেষে follow-up question রাখো।`;
 
-⚙️ CORE RULES:
-✔ সবসময় বাংলায় বোঝাবে (English sentences ছাড়া)
-✔ নাম জানলে নাম ধরে ডাকো — personal feel আসে
-✔ কখনো user কে নিরুৎসাহিত করবে না
-✔ ভুলকে সবসময় শেখার সুযোগ হিসেবে দেখাও
-✔ প্রতিটা reply এর শেষে একটা follow-up question রাখো
-✔ একসাথে অনেক বেশি information দেবে না — ধীরে ধীরে শেখাও
-✔ User যদি হতাশ হয়, বলো: "English শেখা সময় লাগে। তুমি ঠিকই পারবে!"
-✔ প্রতি ৫টা practice এর পর বলো: "তুমি অনেক ভালো করছো! চালিয়ে যাও।"`;
+const MCTX={chat:'',grammar:'\n[MODE: GRAMMAR CHECK — সব English sentence grammar check করো, TEXT FORMAT use করো]',pronunciation:'\n[MODE: PRONUNCIATION — PRONUNCIATION FORMAT use করো]',conversation:'\n[MODE: CONVERSATION — real situation choose করো, character হও, English এ কথা বলো]',interview:'\n[MODE: INTERVIEW — HR interviewer হও, Bangla feedback দাও]',translate:'\n[MODE: TRANSLATE — translation + 2 alternatives দাও]',vocabulary:'\n[MODE: VOCABULARY — ৫টা useful word শেখাও, মানে+উচ্চারণ+example]'};
 
-const MODE_CONTEXT = {
-  chat: '',
-  grammar: '\n\n[CURRENT MODE: GRAMMAR CHECK — User এর English sentence এর grammar check করো। TEXT MODE FORMAT ব্যবহার করো।]',
-  pronunciation: '\n\n[CURRENT MODE: PRONUNCIATION — PRONUNCIATION FORMAT ব্যবহার করো।]',
-  conversation: '\n\n[CURRENT MODE: CONVERSATION PRACTICE — একটা real-life situation বেছে নাও। Character হও। English এ কথা বলো। User English এ reply করবে।]',
-  interview: '\n\n[CURRENT MODE: INTERVIEW PRACTICE — তুমি interviewer। Common HR questions দাও। Feedback বাংলায়।]',
-  translate: '\n\n[CURRENT MODE: TRANSLATE — বাংলা থেকে English, বা English থেকে বাংলা। ২টা alternative দাও।]',
-  vocabulary: '\n\n[CURRENT MODE: VOCABULARY — আজকের ৫টা useful English word শেখাও — মানে, উচ্চারণ, example sentence সহ।]'
-};
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
+window.showScreen=showScreen;
 
-/* ═══════════════════════════════
-   START APP
-═══════════════════════════════ */
-function startApp() {
-  const key = document.getElementById('keyInput').value.trim();
-  const name = document.getElementById('nameInput').value.trim();
-  if (!key) { alert('API Key দাও বাই!'); return; }
-  apiKey = key;
-  userName = name;
-  localStorage.setItem('es_key', key);
-  localStorage.setItem('es_name', name);
+onAuthStateChanged(auth,async u=>{
+  if(u){curUser=u;const snap=await getDoc(doc(db,'users',u.uid));if(snap.exists()){const d=snap.data();gKey=d.geminiKey||'';secsLeft=d.timerLeft??FREE;}
+  if(!gKey){showScreen('apiScreen');}else{showScreen('appScreen');initApp();}}
+  else{showScreen('authScreen');}
+});
 
-  const saved = localStorage.getItem('es_timer');
-  secondsLeft = saved ? Math.max(0, parseInt(saved)) : FREE_SECONDS;
+let isLogin=true;
+window.switchTab=(tab,el)=>{isLogin=tab==='login';document.querySelectorAll('.auth-tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');document.getElementById('signupExtra').style.display=isLogin?'none':'block';document.getElementById('authBtn').textContent=isLogin?'লগইন করো →':'অ্যাকাউন্ট বানাও →';document.getElementById('authErr').style.display='none';};
 
-  document.getElementById('splash').style.display = 'none';
-  document.getElementById('app').style.display = 'flex';
-  startTimer();
-
-  const greeting = userName
-    ? `নমস্কার ${userName}! 👋 আমি ইংলিশ শেখো — তোমার AI English tutor।\n\nআমরা কী দিয়ে শুরু করবো?\n\n📅 Daily Practice — প্রতিদিনের practice\n✅ Grammar Check — তোমার English sentence check করাও\n🔊 Pronunciation — উচ্চারণ শেখো\n🎭 Conversation — real-life conversation practice\n🎯 Interview Prep — interview এর জন্য তৈরি হও\n🔄 Translate — বাংলা থেকে English\n📚 Vocabulary — নতুন শব্দ শেখো\n\nউপরের বোতাম বা এখানে লিখে জানাও! 😊`
-    : `নমস্কার! 👋 আমি ইংলিশ শেখো — তোমার AI English tutor।\n\nআগে বলো — তোমার নামটা কী? 😊`;
-  addMessage('bot', greeting);
-  if (secondsLeft === 0) showExpired();
-}
-
-/* ═══════════════════════════════
-   TIMER
-═══════════════════════════════ */
-function startTimer() {
-  timerInterval = setInterval(() => {
-    if (secondsLeft > 0) secondsLeft--;
-    localStorage.setItem('es_timer', secondsLeft);
-    updateTimerUI();
-    if (secondsLeft === 0) { clearInterval(timerInterval); showExpired(); }
-  }, 1000);
-  updateTimerUI();
-}
-
-function updateTimerUI() {
-  const h = Math.floor(secondsLeft / 3600);
-  const m = Math.floor((secondsLeft % 3600) / 60);
-  const s = secondsLeft % 60;
-  const txt = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-  document.getElementById('timerText').textContent = txt;
-  const pill = document.getElementById('timerPill');
-  pill.className = 'timer-pill';
-  if (secondsLeft === 0) pill.classList.add('expired');
-  else if (secondsLeft < 600) pill.classList.add('warning');
-}
-
-function showExpired() {
-  document.getElementById('expiredOverlay').style.display = 'flex';
-}
-
-function resetTimer() {
-  secondsLeft = FREE_SECONDS;
-  localStorage.setItem('es_timer', secondsLeft);
-  document.getElementById('expiredOverlay').style.display = 'none';
-  clearInterval(timerInterval);
-  startTimer();
-}
-
-function confirmReset() {
-  if (confirm('চ্যাট এবং timer reset করবো?')) {
-    chatHistory = [];
-    document.getElementById('messages').innerHTML = '';
-    resetTimer();
-    addMessage('bot', 'নতুন করে শুরু হলো! কী শিখতে চাও আজ? 😊');
-  }
-}
-
-/* ═══════════════════════════════
-   MODES
-═══════════════════════════════ */
-function setMode(mode, el) {
-  currentMode = mode;
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-  const hints = {
-    grammar: 'তোমার English sentence লেখো — আমি grammar check করবো...',
-    pronunciation: 'কোন word এর উচ্চারণ শিখতে চাও লেখো...',
-    conversation: 'কোন situation এ practice করতে চাও লেখো...',
-    interview: 'interview practice শুরু করো...',
-    translate: 'বাংলায় লেখো — আমি English এ translate করবো...',
-    vocabulary: 'কোন topic এর vocabulary শিখতে চাও...',
-    chat: 'বাংলায় বা English এ লেখো...'
-  };
-  document.getElementById('chatInput').placeholder = hints[mode] || hints.chat;
-}
-
-/* ═══════════════════════════════
-   MESSAGES
-═══════════════════════════════ */
-function addMessage(role, text) {
-  const wrap = document.getElementById('messages');
-  const div = document.createElement('div');
-  div.className = `msg ${role}`;
-  const initials = role === 'bot' ? '🎓' : (userName ? userName[0].toUpperCase() : '👤');
-  div.innerHTML = `
-    <div class="av ${role}">${initials}</div>
-    <div class="bubble ${role}">${escHtml(text)}</div>`;
-  wrap.appendChild(div);
-  wrap.scrollTop = wrap.scrollHeight;
-}
-
-function escHtml(t) {
-  return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-
-function showTyping() {
-  const wrap = document.getElementById('messages');
-  const div = document.createElement('div');
-  div.className = 'msg bot'; div.id = 'typing';
-  div.innerHTML = `<div class="av bot">🎓</div><div class="typing-bubble"><div class="tdot"></div><div class="tdot"></div><div class="tdot"></div></div>`;
-  wrap.appendChild(div);
-  wrap.scrollTop = wrap.scrollHeight;
-}
-
-function removeTyping() {
-  const t = document.getElementById('typing');
-  if (t) t.remove();
-}
-
-/* ═══════════════════════════════
-   SEND MESSAGE
-═══════════════════════════════ */
-async function sendMessage() {
-  if (secondsLeft === 0) { showExpired(); return; }
-  const input = document.getElementById('chatInput');
-  const text = input.value.trim();
-  if (!text) return;
-
-  addMessage('user', text);
-  input.value = ''; input.style.height = 'auto';
-  chatHistory.push({ role: 'user', parts: [{ text }] });
-  showTyping();
-
-  try {
-    const systemPrompt = SYSTEM_PROMPT + (MODE_CONTEXT[currentMode] || '');
-    const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          system_instruction: { parts: [{ text: systemPrompt }] },
-          contents: chatHistory,
-          generationConfig: { temperature: 0.8, maxOutputTokens: 1200 }
-        })
-      }
-    );
-    const data = await res.json();
-    removeTyping();
-
-    if (data.error) {
-      addMessage('bot', '❌ Error: ' + data.error.message + '\n\nAPI key টা ঠিক আছে তো?');
-      return;
-    }
-    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || 'কিছু একটা সমস্যা হয়েছে। আবার চেষ্টা করো।';
-    chatHistory.push({ role: 'model', parts: [{ text: reply }] });
-    addMessage('bot', reply);
-
-  } catch (e) {
-    removeTyping();
-    addMessage('bot', '❌ Network error। Internet connection check করো।');
-  }
-}
-
-function quickSend(text) {
-  document.getElementById('chatInput').value = text;
-  sendMessage();
-}
-
-function handleKey(e) {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
-}
-
-function autoResize(el) {
-  el.style.height = 'auto';
-  el.style.height = Math.min(el.scrollHeight, 110) + 'px';
-}
-
-/* ═══════════════════════════════
-   VOICE INPUT
-═══════════════════════════════ */
-function toggleVoice() {
-  if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
-    alert('Voice support নেই। Chrome browser use করো।'); return;
-  }
-  if (isRecording) { recognition.stop(); return; }
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  recognition = new SR();
-  recognition.lang = 'en-US';
-  recognition.continuous = false;
-  recognition.interimResults = false;
-  recognition.onstart = () => {
-    isRecording = true;
-    document.getElementById('voiceBtn').classList.add('recording');
-  };
-  recognition.onend = () => {
-    isRecording = false;
-    document.getElementById('voiceBtn').classList.remove('recording');
-  };
-  recognition.onresult = (e) => {
-    const t = e.results[0][0].transcript;
-    document.getElementById('chatInput').value = t;
-    setTimeout(sendMessage, 400);
-  };
-  recognition.onerror = () => {
-    isRecording = false;
-    document.getElementById('voiceBtn').classList.remove('recording');
-  };
-  recognition.start();
-}
-
-/* ═══════════════════════════════
-   AUTO-LOGIN (if key saved)
-═══════════════════════════════ */
-window.onload = () => {
-  const k = localStorage.getItem('es_key');
-  const n = localStorage.getItem('es_name');
-  if (k) {
-    document.getElementById('keyInput').value = k;
-    if (n) document.getElementById('nameInput').value = n;
+window.handleAuth=async()=>{
+  const email=document.getElementById('authEmail').value.trim(),pass=document.getElementById('authPass').value,name=document.getElementById('authName').value.trim();
+  if(!email||!pass){showErr('Email আর Password দাও!');return;}
+  if(!isLogin&&!name){showErr('তোমার নাম দাও!');return;}
+  document.getElementById('authErr').style.display='none';
+  document.getElementById('authLoading').style.display='flex';
+  document.getElementById('authBtn').style.display='none';
+  try{
+    if(isLogin){await signInWithEmailAndPassword(auth,email,pass);}
+    else{const c=await createUserWithEmailAndPassword(auth,email,pass);await updateProfile(c.user,{displayName:name});await setDoc(doc(db,'users',c.user.uid),{name,email,timerLeft:FREE,geminiKey:''});}
+  }catch(e){
+    document.getElementById('authLoading').style.display='none';
+    document.getElementById('authBtn').style.display='block';
+    const m={'auth/email-already-in-use':'এই email এ আগেই account আছে! Login করো।','auth/invalid-email':'সঠিক email দাও।','auth/weak-password':'Password কমপক্ষে ৬ অক্ষর হতে হবে।','auth/invalid-credential':'Email বা Password ভুল!','auth/user-not-found':'Account নেই! Signup করো।'};
+    showErr(m[e.code]||'কিছু সমস্যা হয়েছে। আবার চেষ্টা করো।');
   }
 };
+
+function showErr(msg){const el=document.getElementById('authErr');el.textContent=msg;el.style.display='block';}
+
+window.doLogout=async()=>{if(timerInt)clearInterval(timerInt);await saveTmr();await signOut(auth);history=[];document.getElementById('messages').innerHTML='';};
+
+window.saveApiKey=async()=>{const k=document.getElementById('apiKeyInput').value.trim();if(!k||!k.startsWith('AIza')){alert('সঠিক Gemini API Key দাও!');return;}gKey=k;await setDoc(doc(db,'users',curUser.uid),{geminiKey:k},{merge:true});showScreen('appScreen');initApp();};
+
+function initApp(){
+  const name=curUser.displayName||curUser.email.split('@')[0];
+  document.getElementById('userLabel').textContent='👋 '+name;
+  loadVoices();startTimer();
+  addMsg('bot',`নমস্কার ${name}! 🎉 আমি ইংলিশ শেখো — তোমার AI English tutor।\n\nআমরা কী দিয়ে শুরু করবো?\n\n📅 Daily Practice — প্রতিদিনের ৫টা sentence\n✅ Grammar Check — তোমার sentence check করাও\n🔊 Pronunciation — সঠিক উচ্চারণ শেখো\n🎭 Conversation — real-life conversation practice\n🎯 Interview Prep — চাকরির interview এর জন্য\n🔄 Translate — বাংলা থেকে English\n📚 Vocabulary — নতুন শব্দ শেখো\n\nউপরের বোতাম বা এখানে লিখে জানাও! 😊`,true);
+}
+
+function startTimer(){updateTmrUI();timerInt=setInterval(async()=>{if(secsLeft>0)secsLeft--;updateTmrUI();if(secsLeft%30===0)saveTmr();if(secsLeft===0){clearInterval(timerInt);document.getElementById('expiredOverlay').style.display='flex';}},1000);}
+function updateTmrUI(){const h=Math.floor(secsLeft/3600),m=Math.floor((secsLeft%3600)/60),s=secsLeft%60;document.getElementById('timerText').textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;const p=document.getElementById('timerPill');p.className='timer-pill';if(secsLeft===0)p.classList.add('exp');else if(secsLeft<600)p.classList.add('warn');}
+async function saveTmr(){if(curUser)await setDoc(doc(db,'users',curUser.uid),{timerLeft:secsLeft},{merge:true});}
+window.resetTimer=async()=>{secsLeft=FREE;await saveTmr();document.getElementById('expiredOverlay').style.display='none';clearInterval(timerInt);startTimer();};
+
+function loadVoices(){voices=speechSynthesis.getVoices();if(!voices.length)speechSynthesis.onvoiceschanged=()=>{voices=speechSynthesis.getVoices();};}
+function getVoice(gender){const kw=['en-in','india','raveena','heera','veena','priya'];let v=voices.find(v=>{const n=v.name.toLowerCase(),l=v.lang.toLowerCase();return kw.some(k=>n.includes(k)||l.includes(k));});if(!v){if(gender==='female')v=voices.find(v=>v.name.includes('Samantha')||v.name.includes('Karen')||v.name.toLowerCase().includes('female'));else v=voices.find(v=>v.name.includes('Daniel')||v.name.includes('David')||v.name.toLowerCase().includes('male'));}return v||voices[0];}
+function speak(text){if(!speechSynthesis)return;speechSynthesis.cancel();const clean=text.replace(/[^\x00-\x7F\u0980-\u09FF\s.,!?]/g,'').trim().slice(0,400);if(!clean)return;const u=new SpeechSynthesisUtterance(clean);u.voice=getVoice(document.getElementById('voiceGender').value);u.rate=parseFloat(document.getElementById('voiceSpeed').value);u.pitch=document.getElementById('voiceGender').value==='female'?1.1:0.9;u.lang='en-IN';speechSynthesis.speak(u);}
+
+function addMsg(role,text,autoSpeak=false){
+  const wrap=document.getElementById('messages'),div=document.createElement('div');
+  div.className=`msg ${role}`;
+  const init=role==='bot'?'🎓':(curUser?.displayName||'U')[0].toUpperCase();
+  const bwrap=document.createElement('div');bwrap.className='bwrap';
+  const bubble=document.createElement('div');bubble.className=`bubble ${role}`;bubble.textContent=text;
+  bwrap.appendChild(bubble);
+  if(role==='bot'){const sb=document.createElement('button');sb.className='speak-btn';sb.textContent='🔊 Read aloud';sb.onclick=()=>speak(text);bwrap.appendChild(sb);}
+  div.innerHTML=`<div class="av ${role}">${init}</div>`;div.appendChild(bwrap);
+  wrap.appendChild(div);wrap.scrollTop=wrap.scrollHeight;
+  if(role==='bot'&&autoSpeak&&document.getElementById('autoRead').checked)setTimeout(()=>speak(text),500);
+}
+function showTyping(){const wrap=document.getElementById('messages'),div=document.createElement('div');div.className='typing-wrap';div.id='typing';div.innerHTML=`<div class="av bot">🎓</div><div class="typing-bubble"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>`;wrap.appendChild(div);wrap.scrollTop=wrap.scrollHeight;}
+function rmTyping(){const t=document.getElementById('typing');if(t)t.remove();}
+
+window.sendMessage=async()=>{
+  if(secsLeft===0){document.getElementById('expiredOverlay').style.display='flex';return;}
+  const inp=document.getElementById('chatInput'),text=inp.value.trim();if(!text)return;
+  addMsg('user',text);inp.value='';inp.style.height='auto';
+  history.push({role:'user',parts:[{text}]});showTyping();
+  try{
+    const res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${gKey}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system_instruction:{parts:[{text:PROMPT+(MCTX[mode]||'')}]},contents:history,generationConfig:{temperature:0.8,maxOutputTokens:1200}})});
+    const data=await res.json();rmTyping();
+    if(data.error){addMsg('bot','❌ '+data.error.message);return;}
+    const reply=data.candidates?.[0]?.content?.parts?.[0]?.text||'কিছু সমস্যা হয়েছে।';
+    history.push({role:'model',parts:[{text:reply}]});addMsg('bot',reply,true);
+  }catch(e){rmTyping();addMsg('bot','❌ Network error। Internet check করো।');}
+};
+
+window.quickSend=t=>{document.getElementById('chatInput').value=t;sendMessage();};
+window.handleKey=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();}};
+window.autoResize=el=>{el.style.height='auto';el.style.height=Math.min(el.scrollHeight,100)+'px';};
+window.setMode=(m,el)=>{mode=m;document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');};
+
+window.toggleVoice=()=>{
+  if(!('webkitSpeechRecognition'in window||'SpeechRecognition'in window)){alert('Chrome browser use করো Voice এর জন্য।');return;}
+  if(isRec){recog.stop();return;}
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;recog=new SR();recog.lang='en-US';recog.continuous=false;recog.interimResults=false;
+  recog.onstart=()=>{isRec=true;document.getElementById('voiceBtn').classList.add('rec');};
+  recog.onend=()=>{isRec=false;document.getElementById('voiceBtn').classList.remove('rec');};
+  recog.onresult=e=>{document.getElementById('chatInput').value=e.results[0][0].transcript;setTimeout(sendMessage,400);};
+  recog.onerror=()=>{isRec=false;document.getElementById('voiceBtn').classList.remove('rec');};
+  recog.start();
+};
+
+window.addEventListener('beforeunload',saveTmr);
 </script>
 </body>
 </html>
